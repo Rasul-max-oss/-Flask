@@ -1,0 +1,19 @@
+
+{% extends 'base.html' %}
+{% block title %}Корзина{% endblock %}
+{% block content %}
+ <h1>Корзина</h1>
+    <div class="cart">
+        {% if cart_items %}
+            <ul>
+                {% for item in cart_items %}
+                    <li>{{ item.name }} - {{ item.price }} руб.</li>
+                {% endfor %}
+            </ul>
+            <p>Всего товаров: {{ cart_items|length }}</p>
+        {% else %}
+            <p>Ваша корзина пуста.</p>
+        {% endif %}
+    </div>
+    <a href="{{ url_for('index') }}" class="btn">Продолжить покупки</a>
+{% endblock %}

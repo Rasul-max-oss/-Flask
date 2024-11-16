@@ -1,0 +1,24 @@
+
+
+{% extends 'base.html' %}
+{% block title %} Страница администратора {% endblock %}
+{% block content %}
+<h1>Страница администратора: добавьте товар в магазин</h1>
+  <form method="post">
+      <label for="name">Название товара:</label><br>
+      <input type="text" id="name" name="name" required><br><br>
+
+      <label for="description">Описание товара:</label><br>
+      <input type="text" id="description" name="description" required><br><br>
+
+      <label for="price">Цена товара:</label><br>
+      <input type="number" id="price" name="price" required><br><br>
+
+      <input type="submit" value="Добавить товар">
+  </form>
+{% endblock %}
+
+
+
+
+
