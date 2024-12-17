@@ -1,0 +1,107 @@
+/* Общие стили для контейнера продуктов */
+.products-wrapper {
+    margin: 0 auto;
+    width: 100%;  /* Сделаем контейнер гибким */
+    max-width: 1200px;  /* Максимальная ширина для больших экранов */
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #e0e0e0;  /* Легкая граница для отделения */
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;  /* Автоматический перенос карточек на следующую строку */
+    gap: 20px;  /* Расстояние между карточками */
+    justify-content: space-evenly;  /* Выравнивание карточек по центру */
+    padding: 0;
+}
+
+.product {
+    width: calc(33.33% - 20px);  /* Три карточки в ряд с учетом отступа */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Выравнивание содержимого по центру */
+    text-align: center;
+}
+
+.product:hover {
+    transform: translateY(-8px);  /* Карточка поднимется при наведении */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);  /* Увеличиваем тень */
+}
+
+.product img {
+    width: 100%;  /* Изображение растягивается по ширине карточки */
+    height: 180px;  /* Фиксированная высота изображения */
+    object-fit: cover;  /* Заполнение изображения без искажения */
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.product h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+.product p {
+    font-size: 1rem;
+    color: #555;
+    font-weight: normal;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.product a {
+    background-color: #ff7b00;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.product a:hover {
+    background-color: #e66d00;
+}
+
+/* Адаптивность для экрана 1200px */
+@media (max-width: 1200px) {
+    .product {
+        width: calc(50% - 20px);  /* Две карточки в ряду для экрана средней ширины */
+    }
+}
+
+/* Адаптивность для экрана 768px (планшеты и малые экраны) */
+@media (max-width: 768px) {
+    .product {
+        width: calc(100% - 20px);  /* Одна карточка в ряду */
+    }
+
+    .products {
+        justify-content: center;  /* Центрируем карточки */
+    }
+}
+
+/* Адаптивность для экрана 480px (мобильные устройства) */
+@media (max-width: 480px) {
+    .product {
+        width: calc(100% - 20px);  /* Одна карточка на весь экран */
+        padding: 10px;  /* Уменьшаем отступы */
+    }
+    .product img {
+        height: 150px;  /* Уменьшаем размер изображения на мобильных устройствах */
+    }
+}
+
+h1{
+    text-align:center;
+}

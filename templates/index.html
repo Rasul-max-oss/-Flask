@@ -1,19 +1,64 @@
-
-
 {% extends 'base.html' %}
-{% block title %}Главная страница {% endblock %}
+{% block title %}Главная страница{% endblock %}
 {% block content %}
- <h1>Интернет-магазин</h1>
+<h1 class="product-title">Apple</h1>
+
+<div class="products-wrapper">
     <div class="products">
-        {% for product in products %}
-            <div class="product">
-                <h2>{{ product.name }}</h2>
-                <p>{{ product.description }}</p>
-                <p>Цена: {{ product.price }} руб.</p>
-                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn">Добавить в корзину</a>
-            </div>
-        {% endfor %}
+        <!-- Блок для Mac -->
+        <div class="product" id="mac-block">
+            <img src="{{ url_for('static', filename='img/mac1.jpeg') }}" >
+            <h2>Mac</h2>
+            <p>MacBook Air, MacBook Pro</p>
+            <p>MacStudio, Mac Mini</p>
+        </div>
+
+        <!-- Блок для iPhone -->
+        <div class="product" id="iphone-block">
+            <img src="{{ url_for('static', filename='img/img1.jpeg') }}" >
+            <h2>iPhone</h2>
+            <p>iPhone 15 PRO, iPhone 16</p>
+            <p>iPhone 14, iPhone 13 PRO</p>
+        </div>
+
+        <!-- Блок для Watch -->
+        <div class="product" id="watch-block">
+            <img src="{{ url_for('static', filename='img/img1.jpeg') }}" >
+            <h2>Watch</h2>
+            <p>Watch Ultra, Watch Series</p>
+            <p>Watch SE 2023, Аксессуары</p>
+        </div>
+
+        <!-- Блок для iPad -->
+        <div class="product" id="ipad-block">
+            <img src="{{ url_for('static', filename='img/img1.jpeg') }}" >
+            <h2>iPad</h2>
+            <p>iPad PRO, iPad Air</p>
+            <p>iPad SE, iPad mini</p>
+        </div>
+
+        <!-- Блок для AirPods -->
+        <div class="product" id="airpods-block">
+            <img src="{{ url_for('static', filename='img/img1.jpeg') }}" >
+            <h2>AirPods</h2>
+            <p>AirPods, AirPods PRO</p>
+            <p>AirPods Max, Аксессуары</p>
+        </div>
     </div>
-    <a href="{{ url_for('cart') }}" class="btn">Перейти в корзину</a>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById('iphone-block').addEventListener('click', function() {
+            window.location.href = '/phone';  // Переход на страницу iPhone
+        });
+
+   document.getElementById('mac-block').addEventListener('click', function() {
+            window.location.href = '/dekstop';  // Переход на страницу Mac
+        });
+
+</script>
 {% endblock %}
 

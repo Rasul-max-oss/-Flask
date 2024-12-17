@@ -1,24 +1,35 @@
-
-
 {% extends 'base.html' %}
+
 {% block title %} Страница администратора {% endblock %}
+
 {% block content %}
+<style>
+
+</style>
 <h1>Страница администратора: добавьте товар в магазин</h1>
-  <form method="post">
-      <label for="name">Название товара:</label><br>
-      <input type="text" id="name" name="name" required><br><br>
 
-      <label for="description">Описание товара:</label><br>
-      <input type="text" id="description" name="description" required><br><br>
+<!-- Форма добавления товара -->
+<form method="post" class="admin-form">
+    <label for="name">Название товара:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
 
-      <label for="price">Цена товара:</label><br>
-      <input type="number" id="price" name="price" required><br><br>
+    <label for="chapter">Категория товара:</label><br>
+    <select id="chapter" name="chapter" required>
+        <option value="iphone">iPhone</option>
+        <option value="dekstop">Mac</option>
+        <option value="airpods">AirPods</option>
+        <option value="ipad">iPad</option>
+        <option value="watch">Watch</option>
+    </select><br><br>
 
-      <input type="submit" value="Добавить товар">
-  </form>
+    <label for="description">Описание товара:</label><br>
+    <input type="text" id="description" name="description" required><br><br>
+
+    <label for="price">Цена товара:</label><br>
+    <input type="number" id="price" name="price" required><br><br>
+
+    <input type="submit" value="Добавить товар" class="submit-btn">
+</form>
 {% endblock %}
-
-
-
 
 

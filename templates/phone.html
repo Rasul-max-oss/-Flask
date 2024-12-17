@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+
+{% block title %}Айфоны {% endblock %}
+
+{% block content %}
+<h1 class="product-title">Смартфоны Apple</h1>
+
+<!-- Фильтр для выбора моделей iPhone -->
+<div class="filter-container">
+    <form method="get" action="{{ url_for('phone') }}" class="filter-form">
+        <!-- Фильтр по модели -->
+        <div class="filter-item">
+            <label for="iphone-model" class="filter-label">Модель:</label>
+            <select id="iphone-model" name="model" class="filter-select">
+                <option value="">Все модели</option>
+                <option value="iphone_12" {% if request.args.get('model') == 'iphone_12' %}selected{% endif %}> iPhone 12</option>
+                <option value="iphone_13" {% if request.args.get('model') == 'iphone_13' %}selected{% endif %}> iPhone 13</option>
+                <option value="iphone_14" {% if request.args.get('model') == 'iphone_14' %}selected{% endif %}> iPhone 14</option>
+                <option value="iphone_15" {% if request.args.get('model') == 'iphone_15' %}selected{% endif %}> iPhone 15</option>
+            </select>
+        </div>
+
+        <!-- Фильтр по цене -->
+        <div class="filter-item">
+            <label for="price-range" class="filter-label">Ценовой диапазон:</label>
+            <input type="range" id="price-range" name="price" min="0" max="200000" step="1000" class="filter-range"
+                value="{{ request.args.get('price', 0) }}">
+            <span class="price-display" id="price-display">{{ request.args.get('price', 0) }} ₽</span>
+        </div>
+
+        <!-- Фильтр по цвету -->
+        <div class="filter-item">
+            <label for="color" class="filter-label">Цвет:</label>
+            <select id="color" name="color" class="filter-select">
+                <option value="">Все цвета</option>
+                <option value="black" >Черный</option>
+                <option value="white" >Белый</option>
+                <option value="gold" >Золотой</option>
+                <option value="blue" >Синий</option>
+            </select>
+        </div>
+
+        <button type="submit" class="filter-btn">Применить фильтры</button>
+    </form>
+</div>
+
+<div class="products-wrapper">
+    <div class="products">
+        {% for product in products %}
+            <div class="card">
+                <img class="img-active" src="{{ url_for('static', filename='img/img1.jpeg') }}" alt="{{ product.name }}">
+                <img src="{{ url_for('static', filename='img/iphone2.jpg') }}" alt="{{ product.name }}" class="img-hover">
+                <div class="info">
+                    <h3>{{ product.name }}</h3>
+                    <p class="price">{{ product.price }} ₽</p>
+                    <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="add-to-cart">Добавить в корзину</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<a href="{{ url_for('cart') }}" class="btn">Перейти в корзину</a>
+{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #fafafa;
+        color: #333;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    /* Контейнер для фильтра */
+    .filter-container {
+        padding: 20px 20px;
+        text-align: center;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .filter-form {
+        display: flex;
+        gap: 15px;
+        width: 100%;
+        max-width: 1200px;
+        background-color: transparent;
+        padding: 20px;
+        justify-content: space-between;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .filter-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .filter-label {
+        font-size: 16px;
+        color: #333;
+    }
+
+    .filter-select,
+    .filter-range {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #333;
+        width: 100%;
+    }
+
+    .filter-range {
+        width: 100%;
+    }
+
+    .price-display {
+        font-size: 16px;
+        margin-top: 5px;
+    }
+
+    .filter-btn {
+        padding: 12px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .filter-btn:hover {
+        background-color: #2980b9;
+    }
+
+    /* Контейнер для карточек */
+    .products-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    /* Стили для карточки */
+    .card {
+        width: 240px;
+        height: 350px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+        width: 100%;
+        height: 55%;
+        object-fit: cover;
+        transition: opacity 0.5s ease;
+    }
+
+    .card .img-hover {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 55%;
+        object-fit: cover;
+    }
+
+    .card:hover .img-hover {
+        opacity: 1;
+    }
+
+    /* Информация (текст) и кнопка */
+    .card .info {
+        padding: 15px;
+        position: relative;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card .info h3 {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .card .info .price {
+        font-size: 18px;
+        color: #e74c3c;
+        margin-bottom: 10px;
+    }
+
+    .add-to-cart {
+        background-color: #3498db;
+        color: #fff;
+        padding: 8px 15px;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .card:hover .add-to-cart {
+        opacity: 1;
+    }
+
+    .add-to-cart:hover {
+        background-color: red;
+    }
+
+    /* Адаптивность для разных экранов */
+    @media (max-width: 1200px) {
+        .card {
+            width: 220px;
+            height: 330px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            width: 200px;
+            height: 310px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .card {
+            width: 100%;
+            height: auto;
+        }
+    }
+</style>
+{% endblock %}
+{% block scripts %}
+<script>
+    const priceRange = document.getElementById('price-range');
+    const priceDisplay = document.getElementById('price-display');
+
+    priceRange.addEventListener('input', function() {
+        priceDisplay.textContent = `${priceRange.value} ₽`;
+    });
+</script>
+{% endblock %}
