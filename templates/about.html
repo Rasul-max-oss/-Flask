@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% block title %}О нас{% endblock %}
+{% block content %}
+  <h1>IStore</h1>
+  <h2 id="guarantee">2 года гарантии</h2>
+  <div class="container-our">
+    <div class="our-item">
+      <h1 class="our-title">Наши преимущества</h1>
+      <div class="our-info">
+        2 года гарантии
+        <p class="hidden-text">Подробности: Мы предоставляем гарантию на всю продукцию в течение 2 лет с момента покупки.</p>
+      </div>
+      <div class="our-info">
+        Лучшие локации
+        <p class="hidden-text">Наши магазины расположены в лучших местах города для вашего удобства.</p>
+      </div>
+      <div class="our-info">
+        Профессиональные консультанты
+        <p class="hidden-text">Наши консультанты помогут выбрать вам лучший товар, подходящий под ваши нужды.</p>
+      </div>
+      <div class="our-info">
+        Поддержка после покупки
+        <p class="hidden-text">Мы предоставляем помощь в случае возникновения проблем с товаром даже после его покупки.</p>
+      </div>
+    </div>
+    <img id="our-image" src="{{ url_for('static', filename='img/features-01.jpg') }}" >
+  </div>
+
+  <div class="container-new">
+    <div id="new-item" class="new-item">
+      <h3 id="newItemTitle">IStore: — это территория инноваций и технических чудес для тех, кто ценит комфорт</h3>
+      <p id="newItemInfo">Из ассортимента самых востребованных мировых брендов мы тщательно отбираем лучшие модели и исключительные продукты, которые превзойдут ваши ожидания и поднимут вашу жизнь на новую высоту.</p>
+    </div>
+    <div class="new-item second-item">
+      <h3>Наш ассортимент — это самые желанные гаджеты для себя и близких</h3>
+      <p>У нас можно найти все, что человек хотел бы получить в подарок на свой день рождения из сегмента современной электроники. Restore: лучшее место для выбора подарка для себя и для своих близких. Даже если этот близкий — кот.</p>
+    </div>
+  </div>
+
+<h2>IStore: не просто магазин</h2>
+ <div class="container-new">
+    <div id="new-item" class="new-item" >
+      <h3 id="newItemTitle"> Творите вместе с IStore:</h3>
+      <p id="newItemInfo">Вдохновляйтесь в пространстве для креативного комьюнити.</p>
+    </div>
+    <div class="new-item second-item ">
+      <h3>Вступайте в программу привилегий restore:club</h3>
+      <p>Пользуйтесь специальными предложениями и совершайте покупки с выгодой..</p>
+    </div>
+   <div class="new-item three-item">
+      <h3>Присоединяйтесь к нам в социальных сетях</h3>
+      <p>Получайте полезный контент на тему технологий..</p>
+    </div>
+  </div>
+
+{% endblock %}
+{% block styles %}
+  <style>
+    /* Основные стили для страницы */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 70px;
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-size: 90px;
+      font-weight: 600;
+      color: #FFD700;
+      margin-top: 0;
+      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+      opacity: 1;
+    }
+
+    /* Стили для контейнера */
+    .container-our {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    /* Стили для нового блока */
+    .container-new {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 30px;
+      gap: 30px;
+    }
+
+    .container-new h3 {
+      font-size: 35px;
+      line-height: 30px;
+    }
+
+    .new-item {
+      flex: 1;
+      padding: 40px;
+      background-color: #f0f0f0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out, background-color 0.5s ease-in-out;
+      height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .new-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .second-item {
+      margin-top: 50px;
+    }
+
+    /* Стили для блоков с преимуществами */
+    .our-item {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .our-title {
+      font-size: 40px;
+      font-weight: bold;
+      margin-top: 0;
+      text-align: left;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .our-info {
+      font-size: 23px;
+      font-weight: bold;
+      margin-top: 30px;
+      text-align: left;
+      margin-bottom: 15px;
+      color: #333;
+      padding-bottom: 18px;
+      border-bottom: 1px solid gray;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .our-info:hover {
+      color: #007BFF;
+    }
+
+    /* Стили для скрытого текста */
+    .hidden-text {
+      display: none;
+      font-size: 18px;
+      color: #555;
+      margin-top: 15px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+    }
+
+    /* Стили для появления скрытого текста */
+    .show-text .hidden-text {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Стили для изображения */
+    img {
+      flex: 1;
+      max-width: 45%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+      align-self: flex-start;
+    }
+
+    /* Эффект для текста в новом блоке */
+    .new-item h3 {
+      transition: font-size 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    }
+    .new-item p{
+      opacity:0;
+      transition:opacity 0.5s ease;
+      font-weight:300;
+      color:white;
+      font-size:22px;
+    }
+    .three-item{
+      margin-top:100px;
+    }
+
+  </style>
+{% endblock %}
+{% block scripts %}
+<script>
+  const images = {{ images | tojson }};
+  const ourImg = document.getElementById("our-image");
+  let currentImageIndex = 0;
+
+  // Переключение текста для guarantee
+  const guaranteeElement = document.getElementById("guarantee");
+  const texts = ["На рынке с 2010 года", "2 года гарантии", "Оригинальная продукция"];
+  const colors = ["#FFD700", "#0000FF", "#FF0000"];
+  let currentIndex = 0;
+
+  function changeText() {
+    guaranteeElement.style.transform = "rotateY(90deg)";
+    guaranteeElement.style.opacity = "0";
+
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % texts.length;
+      const currentColorIndex = (currentIndex + 1) % colors.length;
+      guaranteeElement.innerText = texts[currentIndex];
+      guaranteeElement.style.transform = "rotateY(0deg)";
+      guaranteeElement.style.opacity = "1";
+      guaranteeElement.style.color = colors[currentColorIndex];
+    }, 1000);
+  }
+
+  setInterval(changeText, 2500);
+
+  // Обработчики для .our-info
+  document.querySelectorAll('.our-info').forEach((item, index) => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('show-text');
+      document.querySelectorAll('.our-info').forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('show-text');
+        }
+      });
+
+      if (images[index]) {
+        ourImg.src = "{{ url_for('static', filename='img/') }}" + images[index];
+      }
+    });
+  });
+
+  // Блоки new-item
+  const newItems = document.querySelectorAll('.new-item');
+  newItems.forEach(item => {
+    const newItemTitle = item.querySelector('h3');
+    const newItemInfo = item.querySelector('p');
+
+    item.addEventListener('mouseenter', () => {
+      item.style.backgroundColor = item.classList.contains('second-item') ? '#FF69B4' : '#007BFF';
+      newItemTitle.style.fontSize = '24px';
+      newItemTitle.style.color = 'white';
+      newItemTitle.style.transform = 'translateY(-10px)';
+      newItemInfo.style.opacity = 1;
+    });
+
+    item.addEventListener('mouseleave', () => {
+      item.style.backgroundColor = '';
+      newItemTitle.style.fontSize = '';
+      newItemTitle.style.color = '';
+      newItemTitle.style.transform = '';
+      newItemInfo.style.opacity = 0;
+    });
+  });
+</script>
+{% endblock %}
