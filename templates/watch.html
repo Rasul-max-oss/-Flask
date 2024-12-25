@@ -1,30 +1,32 @@
 {% extends 'base.html' %}
-{% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dekstop.css') }}">
-{% endblock %}
-{% block title %}MacBook и ПК Apple {% endblock %}
-{% block content %}
-<h1 class="product-title">Компьютеры и ноутбуки Apple</h1>
 
-<!-- Фильтр для выбора моделей Mac -->
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/watch.css') }}">
+{% endblock %}
+
+{% block title %}Apple Watch {% endblock %}
+{% block content %}
+<h1 class="product-title">Часы Apple</h1>
+
+<!-- Фильтр для выбора моделей Apple Watch -->
 <div class="filter-container">
-    <form method="get" action="{{ url_for('dekstop') }}" class="filter-form">
+    <form method="get" action="{{ url_for('watch') }}" class="filter-form">
         <!-- Фильтр по модели -->
         <div class="filter-item">
-            <label for="mac-model" class="filter-label">Модель:</label>
-            <select id="mac-model" name="model" class="filter-select">
+            <label for="watch-model" class="filter-label">Модель:</label>
+            <select id="watch-model" name="model" class="filter-select">
                 <option value="">Все модели</option>
-                <option value="macbook_air" {% if request.args.get('model') == 'macbook_air' %}selected{% endif %}> MacBook Air</option>
-                <option value="macbook_pro" {% if request.args.get('model') == 'macbook_pro' %}selected{% endif %}> MacBook Pro</option>
-                <option value="mac_studio" {% if request.args.get('model') == 'mac_studio' %}selected{% endif %}> Mac Studio</option>
-                <option value="mac_mini" {% if request.args.get('model') == 'mac_mini' %}selected{% endif %}> Mac Mini</option>
+                <option value="watch_se" {% if request.args.get('model') == 'watch_se' %}selected{% endif %}> Apple Watch SE</option>
+                <option value="watch_7" {% if request.args.get('model') == 'watch_7' %}selected{% endif %}> Apple Watch Series 7</option>
+                <option value="watch_8" {% if request.args.get('model') == 'watch_8' %}selected{% endif %}> Apple Watch Series 8</option>
+                <option value="watch_ultra" {% if request.args.get('model') == 'watch_ultra' %}selected{% endif %}> Apple Watch Ultra</option>
             </select>
         </div>
 
         <!-- Фильтр по цене -->
         <div class="filter-item">
             <label for="price-range" class="filter-label">Ценовой диапазон:</label>
-            <input type="range" id="price-range" name="price" min="0" max="500000" step="1000" class="filter-range"
+            <input type="range" id="price-range" name="price" min="0" max="100000" step="1000" class="filter-range"
                 value="{{ request.args.get('price', 0) }}">
             <span class="price-display" id="price-display">{{ request.args.get('price', 0) }} ₽</span>
         </div>
@@ -34,10 +36,10 @@
             <label for="color" class="filter-label">Цвет:</label>
             <select id="color" name="color" class="filter-select">
                 <option value="">Все цвета</option>
-                <option value="space_gray" >Space Gray</option>
-                <option value="silver" >Серебристый</option>
-                <option value="starlight" >Звездный свет</option>
-                <option value="midnight" >Полночный</option>
+                <option value="black">Черный</option>
+                <option value="white">Белый</option>
+                <option value="silver">Серебристый</option>
+                <option value="blue">Синий</option>
             </select>
         </div>
 
@@ -49,9 +51,8 @@
     <div class="products">
         {% for product in products %}
             <div class="card">
-                <img class="img-active" src="{{ url_for('static', filename='img/mac1.jpeg') }}" alt="{{ product.name }}">
-                <img src="{{ url_for('static', filename='img/mac2.jpeg') }}" alt="{{ product.name }}" class="img-hover">
-
+                <img class="img-active" src="{{ url_for('static', filename='img/watch1.jpg') }}" alt="{{ product.name }}">
+                <img src="{{ url_for('static', filename='img/watch2.jpg') }}" alt="{{ product.name }}" class="img-hover">
                 <div class="info">
                     <h3>{{ product.name }}</h3>
                     <p class="price">{{ product.price }} ₽</p>
@@ -64,7 +65,6 @@
 
 <a href="{{ url_for('cart') }}" class="btn">Перейти в корзину</a>
 {% endblock %}
-
 
 {% block scripts %}
 <script>

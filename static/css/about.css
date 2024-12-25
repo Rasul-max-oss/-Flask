@@ -1,0 +1,277 @@
+    /* Основные стили для страницы */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #333;
+}
+
+h1 {
+  font-size: 70px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 90px;
+  font-weight: 600;
+  color: #FFD700;
+  margin-top: 0;
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  opacity: 1;
+}
+
+/* Стили для контейнера */
+.container-our,
+.container-new {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 100px auto;
+  padding: 30px;
+  gap: 30px;
+  flex-wrap: wrap; /* Для лучшего поведения на мобильных устройствах */
+}
+
+/* Стили для нового блока */
+.container-new h3 {
+  font-size: 35px;
+  line-height: 30px;
+}
+
+.new-item {
+  flex: 1;
+  padding: 40px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, background-color 0.5s ease-in-out;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.new-item:hover {
+  transform: translateY(-5px);
+}
+
+.second-item {
+  margin-top: 50px;
+}
+
+/* Стили для блоков с преимуществами */
+.our-item {
+  flex: 1;
+  padding: 20px;
+}
+
+.our-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 0;
+  text-align: left;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.our-info {
+  font-size: 23px;
+  font-weight: bold;
+  margin-top: 30px;
+  text-align: left;
+  margin-bottom: 15px;
+  color: #333;
+  padding-bottom: 18px;
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+  position: relative;
+}
+
+.our-info:hover {
+  color: #007BFF;
+}
+
+/* Стили для скрытого текста */
+.hidden-text {
+  display: none;
+  font-size: 18px;
+  color: #555;
+  margin-top: 15px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+/* Стили для появления скрытого текста */
+.show-text .hidden-text {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Стили для изображения */
+img {
+  flex: 1;
+  max-width: 45%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  align-self: flex-start;
+}
+
+/* Эффект для текста в новом блоке */
+.new-item h3 {
+  transition: font-size 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.new-item p {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  font-weight: 300;
+  color: white;
+  font-size: 22px;
+}
+
+.three-item {
+  margin-top: 100px;
+}
+
+/* Мобильная адаптивность */
+
+/* Для экранов шириной до 1024px (планшеты и ноутбуки) */
+@media (max-width: 1024px) {
+  .container-our,
+  .container-new {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .container-our img,
+  .container-new .new-item {
+    max-width: 100%;
+    flex: none;
+    margin-bottom: 30px;
+  }
+
+  .container-new .new-item {
+    padding: 30px;
+  }
+
+  .our-item {
+    flex: none;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .our-info {
+    font-size: 18px;
+  }
+
+  .our-title {
+    font-size: 32px;
+  }
+
+  .new-item h3 {
+    font-size: 28px;
+  }
+
+  .second-item {
+    margin-top: 30px;
+  }
+}
+
+/* Для экранов шириной до 768px (мобильные устройства) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 50px;
+  }
+
+  h2 {
+    font-size: 60px;
+  }
+
+  .container-our,
+  .container-new {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .our-info {
+    font-size: 18px;
+    padding: 10px 0;
+  }
+
+  .our-item,
+  .new-item {
+    flex: none;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .new-item h3 {
+    font-size: 24px;
+  }
+
+  .container-new .new-item p {
+    font-size: 18px;
+  }
+
+  .second-item {
+    margin-top: 20px;
+  }
+
+  img {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
+
+/* Для экранов шириной до 480px (очень маленькие экраны) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 50px;
+  }
+
+  .container-our,
+  .container-new {
+    flex-direction: column;
+    padding: 5px;
+  }
+
+  .our-info {
+    font-size: 16px;
+  }
+
+  .our-item,
+  .new-item {
+    flex: none;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 15px;
+  }
+
+  .new-item h3 {
+    font-size: 20px;
+  }
+
+  .new-item p {
+    font-size: 16px;
+  }
+
+  img {
+    max-width: 100%;
+    margin-top: 10px;
+  }
+}

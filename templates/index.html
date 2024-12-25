@@ -23,7 +23,7 @@
 
         <!-- Блок для Watch -->
         <div class="product" id="watch-block">
-            <img src="{{ url_for('static', filename='img/img1.jpeg') }}" >
+            <img src="{{ url_for('static', filename='img/watch2.jpg') }}" >
             <h2>Watch</h2>
             <p>Watch Ultra, Watch Series</p>
             <p>Watch SE 2023, Аксессуары</p>
@@ -57,6 +57,10 @@
 
    document.getElementById('mac-block').addEventListener('click', function() {
             window.location.href = '/dekstop';  // Переход на страницу Mac
+        });
+
+     document.getElementById('watch-block').addEventListener('click', function() {
+            window.location.href = '/watch';  // Переход на страницу Mac
         });
 
 </script>
