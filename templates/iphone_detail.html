@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+
+{% block title %}Детали Айфона: {{ iphone.name }}{% endblock %}
+
+{% block content %}
+   <div class="product-details-wrapper">
+        <div class="product-details">
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="product-image">
+                        <img src="{{ url_for('static', filename='img/img7.jpg') }}" alt="{{ iphone.name }}">
+                    </div>
+                    <div class="product-image">
+                        <img src="{{ url_for('static', filename='img/img6.jpeg') }}" alt="{{ iphone.name }}">
+                    </div>
+                    <div class="product-image">
+                        <img src="{{ url_for('static', filename='img/img4.webp') }}" alt="{{ iphone.name }}">
+                    </div>
+                </div>
+
+                <!-- Кнопки навигации с иконками, увеличены размеры -->
+                <button class="prev" onclick="moveSlide(-1)"><i class="fa fa-chevron-left"></i></button>
+                <button class="next" onclick="moveSlide(1)"><i class="fa fa-chevron-right"></i></button>
+            </div>
+
+            <div class="product-info">
+                <h1>{{ iphone.name }}</h1>
+                <p class="product-description">{{ iphone.description }}</p>
+                <p class="product-credit">Доступно в рассрочку от 3 583 ₽/мес. Доступно в наличии.</p>
+                <hr>
+                <div class="price-info">
+                    <p><strong>{{ formatted_price }} ₽</strong></p>
+                </div>
+                <div class="button-container">
+                    <a href="/add_to_cart/{{ iphone.id }}" class="btn-add-to-cart">Добавить в корзину</a>
+                    <a href="/quick_order/{{ iphone.id }}" class="btn-quick-order">Быстрый заказ</a>
+                </div>
+            </div>
+
+            <!-- Характеристики айфона -->
+            <div class="product-specs">
+                <h2>Характеристики</h2>
+                <div class="specs-list">
+                    <div class="spec-item">
+                        <strong>Экран:</strong>
+                        <span>{{ iphone.screen_size }} дюймов</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Камера:</strong>
+                        <span>{{ iphone.camera_resolution }} МП</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Процессор:</strong>
+                        <span>{{ iphone.processor }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Оперативная память:</strong>
+                        <span>{{ iphone.ram }} ГБ</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Память:</strong>
+                        <span>{{ iphone.storage }} ГБ</span>
+                    </div>
+                    <div class="spec-item">
+                        <strong>Аккумулятор:</strong>
+                        <span>{{ iphone.battery }} мАч</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/phone" class="back-to-list">Назад к списку айфонов</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    /* Общие стили для слайдера */
+    .slider-container {
+        position: relative;
+        max-width: 100%;
+        overflow: hidden;
+        height: 500px; /* Высота слайдера (адаптируем под мобильные устройства) */
+    }
+
+    .slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .product-image {
+        min-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Стиль для изображений */
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Изображение будет заполнять контейнер */
+        object-position: center;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .product-image img:hover {
+        transform: scale(1.05); /* Легкое увеличение при наведении */
+    }
+
+    /* Кнопки навигации с иконками */
+    button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 20px;
+        cursor: pointer;
+        font-size: 36px;
+        z-index: 10;
+        border-radius: 50%;
+    }
+
+    .prev {
+        left: 20px;
+    }
+
+    .next {
+        right: 20px;
+    }
+
+    .prev, .next {
+        width: 50px;
+        height: 50px;
+    }
+
+    .prev:hover, .next:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Обертка для всего контента */
+    .product-details-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        padding: 0 20px;
+    }
+
+    .product-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+        padding: 30px;
+        width: 100%;
+        max-width: 1200px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    /* Информационный блок */
+    .product-info {
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .product-info h1 {
+        font-size: 32px;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .product-description {
+        font-size: 16px;
+        color: #666;
+        font-weight: 300;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .product-credit {
+        margin-bottom: 30px;
+    }
+
+    .price-info {
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 24px;
+    }
+
+    .price-info p {
+        margin: 0;
+    }
+
+    .price-info strong {
+        font-size: 36px;
+        color: #e74c3c;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    /* Кнопки */
+    .btn-add-to-cart, .btn-quick-order {
+        display: inline-block;
+        margin: 10px;
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        background-color: #e91e63; /* Розовый для "Добавить в корзину" */
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-add-to-cart:hover {
+        background-color: #c2185b; /* Темно-розовый при наведении */
+        transform: scale(1.05); /* Легкое увеличение при наведении */
+    }
+
+    .btn-quick-order {
+        background-color: #95a5a6; /* Серый для "Быстрый заказ" */
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-quick-order:hover {
+        background-color: #7f8c8d; /* Темно-серый при наведении */
+        transform: scale(1.05); /* Легкое увеличение при наведении */
+    }
+
+    .product-specs {
+        margin-top: 40px;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .product-specs h2 {
+        font-size: 28px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .specs-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 30px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .spec-item {
+        font-size: 16px;
+        color: #555;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+
+    .spec-item strong {
+        color: #333;
+    }
+
+    .back-to-list {
+        display: inline-block;
+        margin-top: 20px;
+        font-size: 16px;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .back-to-list:hover {
+        text-decoration: underline;
+    }
+
+    /* Адаптация для мобильных устройств */
+    @media (max-width: 768px) {
+        .slider-container {
+            height: 300px; /* Высота слайдера на мобильных устройствах */
+        }
+
+        .specs-list {
+            grid-template-columns: 1fr; /* Одиночный столбец на мобильных устройствах */
+        }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Увеличение размеров кнопок на мобильных устройствах */
+        .prev, .next {
+            font-size: 30px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .btn-add-to-cart, .btn-quick-order {
+            padding: 10px 20px; /* Меньше отступы на мобильных */
+        }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let currentIndex = 0;
+
+    function moveSlide(step) {
+        const slides = document.querySelectorAll('.product-image');
+        const totalSlides = slides.length;
+
+        currentIndex += step;
+
+        if (currentIndex < 0) {
+            currentIndex = totalSlides - 1;
+        } else if (currentIndex >= totalSlides) {
+            currentIndex = 0;
+        }
+
+        const slider = document.querySelector('.slider');
+        const offset = -currentIndex * 100;
+        slider.style.transform = `translateX(${offset}%)`;
+    }
+
+    // Автопрокрутка слайдера
+    setInterval(() => moveSlide(1), 3000);
+</script>
+{% endblock %}

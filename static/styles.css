@@ -1,3 +1,4 @@
+/* Общие стили для страницы */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -43,7 +44,60 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.2);  /* Полупрозрачный белый */
-    color: #ffcc00;  /* Цвет текста при наведении */
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffcc00;
 }
 
+/* Стили для кнопки мобильного меню */
+.menu-toggle {
+    display: none; /* Скрыта по умолчанию */
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+/* Адаптивность: для экранов шириной до 768px */
+@media (max-width: 768px) {
+    nav ul {
+        display: none; /* Скрываем меню по умолчанию */
+        flex-direction: column; /* Меню будет в столбик */
+        position: absolute;
+        top: 70px; /* Расположим меню под шапкой */
+        left: 0;
+        background-color: black;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    nav ul li a {
+        padding: 10px;
+    }
+
+    .menu-toggle {
+        display: block; /* Показываем кнопку меню */
+    }
+
+    nav ul.active {
+        display: flex; /* Показываем меню при активном классе */
+    }
+}
+
+/* Адаптивность: для экранов шириной до 480px */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 20px;
+    }
+
+    nav ul li a {
+        font-size: 14px;
+    }
+}

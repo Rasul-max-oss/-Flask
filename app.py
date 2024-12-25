@@ -1,15 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, abort
 from flask_sqlalchemy import SQLAlchemy
+import locale
 import secrets
-
+# Установим локаль для правильного форматирования чисел
+locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 # Конфигурация приложения и базы данных
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)  # Генерация секретного ключа
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///AppleShop.db'
 db = SQLAlchemy(app)
-
-
-
 
 
 # Определение модели товара
@@ -106,6 +105,23 @@ def dekstop():
     return render_template('dekstop.html', products=products)
 
 
+@app.route('/watch')
+def watch():
+    model_filter = request.args.get('model', '')
+    price_filter = request.args.get('price', 0, type=int)
+
+    products_query = Product.query.filter(Product.chapter == 'Watch')
+
+    if model_filter:
+        products_query = products_query.filter(Product.name.like(f'%{model_filter}%'))
+
+    # Фильтруем по цене
+    if price_filter > 0:
+        products_query = products_query.filter(Product.price <= price_filter)
+    products = products_query.all()
+    # products = Product.query.filter(Product.chapter == 'Watch').all()  # Получаем все товары, у которых chapter равен 'айфон'
+    return render_template('watch.html', products=products)
+
 @app.route('/phone')
 def phone():
     # Получаем фильтры из GET-запроса
@@ -123,8 +139,22 @@ def phone():
         products_query = products_query.filter(Product.price <= price_filter)
         # Получаем отфильтрованные товары
     products = products_query.all()
+
     #products = Product.query.filter(Product.chapter == 'Айфон').all()  # Получаем все товары, у которых chapter равен 'айфон'
     return render_template('phone.html', products=products)
+
+
+@app.route('/phone/<int:id>')
+def get_phone(id):
+    # Получаем айфон из базы данных по его id
+    iphone = Product.query.filter_by(id=id, chapter='iphone').first()
+
+    if iphone:
+        # Форматируем цену перед отправкой в шаблон
+        formatted_price = locale.format_string("%d", iphone.price, grouping=True)
+        return render_template('iphone_detail.html', iphone=iphone, formatted_price=formatted_price)
+    else:
+        return abort(404)  # Если айфон не найден, возвращаем ошибку 404
 
 @app.route('/about')
 def about():
