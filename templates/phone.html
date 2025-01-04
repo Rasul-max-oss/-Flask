@@ -30,15 +30,28 @@
             <span class="price-display" id="price-display">{{ request.args.get('price', 0) }} ₽</span>
         </div>
 
+          <!-- Фильтр по памяти -->
+        <div class="filter-item">
+            <label for="memory" class="filter-label">Память:</label>
+            <select id="memory" name="memory" class="filter-select">
+                <option value="">Все объемы</option>
+                <option value="64" {% if request.args.get('memory') == '64' %}selected{% endif %}>64 ГБ</option>
+                <option value="128" {% if request.args.get('memory') == '128' %}selected{% endif %}>128 ГБ</option>
+                <option value="256" {% if request.args.get('memory') == '256' %}selected{% endif %}>256 ГБ</option>
+                <option value="512" {% if request.args.get('memory') == '512' %}selected{% endif %}>512 ГБ</option>
+                <option value="1024" {% if request.args.get('memory') == '1024' %}selected{% endif %}>1 ТБ</option>
+            </select>
+        </div>
+
         <!-- Фильтр по цвету -->
         <div class="filter-item">
             <label for="color" class="filter-label">Цвет:</label>
             <select id="color" name="color" class="filter-select">
                 <option value="">Все цвета</option>
-                <option value="black" >Черный</option>
-                <option value="white" >Белый</option>
-                <option value="gold" >Золотой</option>
-                <option value="blue" >Синий</option>
+                <option value="Черный" {% if request.args.get('color') == 'Черный' %}selected{% endif %}>Черный</option>
+                <option value="Белый" {% if request.args.get('color') == 'Белый' %}selected{% endif %}>Белый</option>
+                <option value="Золотой" {% if request.args.get('color') == 'Золотой' %}selected{% endif %}>Золотой</option>
+                <option value="Синий" {% if request.args.get('color') == 'Синий' %}selected{% endif %}>Синий</option>
             </select>
         </div>
 
